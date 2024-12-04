@@ -9,17 +9,10 @@
 
 ## Fairness measurements
 
-from AI Fairness 360:
-"There are two opposing worldviews on group fairness: we’re all equal (WAE) and what you see is what you get (WYSIWYG). -- If the application follows the WAE worldview, then the demographic parity metrics should be used: disparate_impact and statistical_parity_difference.  If the application follows the WYSIWYG worldview, then the equality of odds metrics should be used: average_odds_difference and average_abs_odds_difference."
-- For example, average_odds_difference might be good, but requires class labels. We can easily turn regression results into classes by dividing them into bins. We have to decide what are our protected attributes and groups. Maybe racial minorities, or smaller income neighbourhoods?
-- The false positive/negative parities could also be used by dividing the levels of vioolent crime into "high" and "low" categories. If our story is about building infrastructure etc, it's about assistive interventions, and therefore false negative parity could be good.
-- https://aif360.readthedocs.io/en/stable/modules/sklearn.html#module-aif360.sklearn.metrics
-
-The fairness-comparison library (https://github.com/algofairness/fairness-comparison) was also mentioned on the course and could be worth trying out. Not entirely sure what it measures though, probably a whole bunch of things.
-
-Aequitas Bias Report (http://aequitas.dssg.io/) creates a whole report from data.
-
-Additionally, we have to be careful of redlining happening since there are so many variables.
+From AI Fairness 360:
+- Average odds difference
+- False negative rate ratio
+Both are group fairness metrics measured on classification results. The regression predictions are turned into classes by splitting them in half, with values under the median forming the class of low crime rate, and above the median values marked as high crime rate. The privileged group is communities with less than 20% population of black people, and unprivileged group with more than 20%.
 
 ## Fitting fair ML models
 
@@ -39,9 +32,7 @@ Kernel ridge regression:
 AIF360 dies not offer any postprocessing tools that work with regression models.
 
 ## Story
-
-possible options:
-- companies investing in building housing, businesses, or other infrastructure in the safest areas
+Companies investing in building housing, businesses, or other infrastructure in the safest areas. Unfairness then shows as
 
 ## Presentations
 
