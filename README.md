@@ -2,9 +2,10 @@
 
 ## TO DO
 
-- preprocess data
-- fit machine learning models
-    - select best one
+- Preprocessing approach
+- Combination of preprocessing and inprocessing
+- Compare the models, maybe select just one
+- Try with more protected attributes? Might be too hard
 
 ## Fairness measurements
 
@@ -20,15 +21,37 @@ Aequitas Bias Report (http://aequitas.dssg.io/) creates a whole report from data
 
 Additionally, we have to be careful of redlining happening since there are so many variables.
 
+## Fitting fair ML models
+
+### Preprocessing approach
+TBA
+
+### Inprocessing approach
+Grid search reduction with bounded group loss constraint. Grid search reduction tries out different models and returns the one with smallest error, and bound group loss keeps the loss of each discrete group below a set value to avoid unfair contributions to the final model.
+
+Linear regression:
+- Because the original dataset was heavily curated (from 128 variables to 5) before fitting the linear regression, the inprocessing no longer does a lot. The final values mostly depend on whether or not the protected attribute is dropped from the data. In that sense, the end result is close to just careful manual preprocessing. Without feature selection, the results are fairly similar (a little worse).
+
+Kernel ridge regression:
+- For this model, all features are kept in the training data. Therefore, the grid search reduction has more room for improvement, and it reduces the effects of redlining that happens with highly correlated variables. Overall, this results in higher accuracy, although at the cost of higher unfairness.
+
+### Postprocessing approach
+AIF360 dies not offer any postprocessing tools that work with regression models.
+
 ## Story
 
 possible options:
-- hospitals deciding the number of emergency rooms or other specialized healthcare resources based on the number of violent crimes
 - companies investing in building housing, businesses, or other infrastructure in the safest areas
 
 ## Presentations
 
-I usually use Google Slides, e.g. this is a nice template: [https://docs.google.com/presentation/d/1pYw7V8xL8oRwKs4zzcJOEkoRiI3z5sbZ8G5j6GjraIY/edit?usp=sharing]
+- First one: [https://docs.google.com/presentation/d/1pYw7V8xL8oRwKs4zzcJOEkoRiI3z5sbZ8G5j6GjraIY/edit?usp=sharing]
+- Second one: [https://docs.google.com/presentation/d/1OVilFk7NHmO5UUIsb9rnH0NfBL1UjMqhEJ7jwBjYHVY/edit?usp=sharing]
+    - Content:
+        - Manual feature selection
+        - Preprocessing
+        - Inprocessing
+        - Combination of all three
 
 ## Links
 - dataset: [https://archive.ics.uci.edu/dataset/183/communities+and+crime]
