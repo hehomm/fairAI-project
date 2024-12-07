@@ -17,7 +17,13 @@ Both are group fairness metrics measured on classification results. The regressi
 ## Fitting fair ML models
 
 ### Preprocessing approach
-TBA
+Tried two preprocessing methods, learning fair representations and disparate impact remover. Learning fair representations (LFR) works by encoding the data in a way that obfuscates the protected attributes, and disparate impact remover edits feature values to increase group fairness while preserving rank-ordering within groups.
+
+Linear regression:
+- LFT breaks the model completely. Linear regression is probably too simple to handle the obfuscated data. Disparate impact remover doesn't really improve fairness.
+
+Kernel ridge regression:
+- LFR works great. Disparate impact remover doesn't really improve fairness.
 
 ### Inprocessing approach
 Grid search reduction with bounded group loss constraint. Grid search reduction tries out different models and returns the one with smallest error, and bound group loss keeps the loss of each discrete group below a set value to avoid unfair contributions to the final model.
