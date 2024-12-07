@@ -12,6 +12,7 @@
 From AI Fairness 360:
 - Average odds difference
 - False negative rate ratio
+
 Both are group fairness metrics measured on classification results. The regression predictions are turned into classes by splitting them in half, with values under the median forming the class of low crime rate, and above the median values marked as high crime rate. The privileged group is communities with less than 20% population of black people, and unprivileged group with more than 20%.
 
 ## Fitting fair ML models
